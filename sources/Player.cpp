@@ -3,14 +3,28 @@
 #include "Color.hpp"//check if have to
 using namespace std;
 namespace pandemic{
+        Player::Player(Board board,City current_city){
+            _board=board;
+            _current_city-current_city;
+        }
+        // City Player::rand_city()
+        // {
+        //     return (City)rand()%board.NUMBER_OF_CITIES;
+        // }
        Player & Player::take_card(City city)
        {
-            return *this;
-
+           cards.insert(city);
        }
 
         //movements options
         Player & Player::drive(City city){
+            if(_board.are_cities_connected(_current_city,city))
+            {
+                _current_city=city;
+            }
+            else{
+                throw invalid_argument{"Error. can't drive to an un connected city."};
+            }
             return *this;
 
         }

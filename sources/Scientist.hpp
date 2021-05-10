@@ -7,7 +7,7 @@ namespace pandemic{
     class Scientist:public Player
     {
         public:
-            Scientist(const Board & board, const City & city, const int & num){}        
+            Scientist(const Board & board, const City & city, const int & num):Player(board,city){}        
             virtual std::string role(); 
     };
 }

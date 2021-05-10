@@ -1,11 +1,21 @@
 #pragma once
+#include "Board.hpp"
 #include "City.hpp"
 #include "Color.hpp"
-
+#include <set>
 #include <string>
 namespace pandemic{
     class Player{
+        private:
+            City rand_city();
+
+        protected:
+            Board _board;
+            City _current_city;
+            std::set<City> cards;
+
         public:
+            Player(const Board & board,const City & current_city);
             Player & take_card(City city);
 
             //movements options
