@@ -7,8 +7,10 @@ namespace pandemic{
     class Dispatcher:public Player
     {
         public:
-            Dispatcher (const Board & board, const City & city){}
+            Dispatcher (Board & board, const City & city):Player(board,city){}
             virtual std::string role(); 
+            virtual Player & fly_direct(City city) override;
+
     };
 
 

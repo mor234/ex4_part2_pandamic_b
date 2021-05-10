@@ -8,6 +8,16 @@ namespace pandemic{
     {
         return "OperationsExpert";
     }
+    /**
+     * @brief doesn't need a maching card to build a study station,
+     * so build anyway
+     * 
+     * @return Player& 
+     */
+    Player &Player::build() {
+        _board.has_study_station(_current_city) = true;
+        return *this;
+    }
 
 
 }

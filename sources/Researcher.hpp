@@ -8,7 +8,8 @@ namespace pandemic{
     class Researcher:public Player
     {
         public:
-            Researcher (const Board & board, const City & city){}
-            virtual std::string role(); 
+            Researcher (Board & board, const City & city):Player(board,city){}
+            virtual std::string role()override; 
+            virtual Player &discover_cure(Color color) override; 
     };
 }

@@ -1,5 +1,7 @@
 #pragma once
 #include "City.hpp"
+#include "Color.hpp"
+
 #include "Player.hpp"
 #include <map>
 #include <set>
@@ -24,7 +26,8 @@ namespace pandemic{
 
             static bool are_cities_connected(City city1,City city2);
             bool & has_study_station(City city);
-            bool & cure_for_color(Color color);
+            bool & color_has_cure(Color color);
+            int & sickness_cubes (City city);
             //operator []
             const int & operator[](City city) const;
             int& operator[](City city);

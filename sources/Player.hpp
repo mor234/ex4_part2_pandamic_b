@@ -8,37 +8,37 @@ namespace pandemic{
     class Player{
         private:
             City rand_city();
-            void Player::throw_5_color_cards(Color color);
-            bool Player::has_5_color_cards(Color color);
+
 
 
         protected:
             Board _board;
             City _current_city;
-            std::set<City> cards;
+            std::set<City> _cards;
             bool has_card(City city);
             void throw_card(City city);
-            const int CARDS_FOR_CURE=5;
+            void throw_x_color_cards(Color color,int cards_for_cure=5);
+            bool has_x_color_cards(Color color,int cards_for_cure=5);
 
 
 
         public:
-            Player(const Board & board,const City & current_city);
+            Player(Board & board,const City & current_city);
             Player & take_card(City city);
 
             //movements options
-            virtual Player & drive(City city);
+            Player & drive(City city);
             virtual Player & fly_direct(City city);
-            virtual Player & fly_charter(City city);
-            virtual Player & fly_shuttle(City city);
+            Player & fly_charter(City city);
+            Player & fly_shuttle(City city);
 
-            Player & treat(City city);
+            virtual Player & treat(City city);
 
-
-
-            Player & discover_cure(Color color);
-            Player & build();
+            virtual Player & discover_cure(Color color);
+            virtual Player & build();
             virtual std::string role()=0;
+
+            void remove_cards();
     };
 
 

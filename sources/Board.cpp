@@ -100,6 +100,9 @@ namespace pandemic {
     std::ostream &operator<<(std::ostream &output, const Board &board) {
         return (output << "hello");
     }
+    int & Board::sickness_cubes (City city){
+        return get<0>(city_attributes[city]);
+    }
 
     bool & Board::has_study_station(City city)
     {
@@ -113,9 +116,9 @@ namespace pandemic {
     {
         return (board_city_map[city1].second).find(city2)!=(board_city_map[city1].second).end();
     }
-    bool & Board::cure_for_color(Color color)
+    bool & Board::color_has_cure(Color color)
     {
-        return cures[array<bool,COLOR_NUMBER>::size_type(color)];
+        return(cures.at(array<bool,COLOR_NUMBER>::size_type (color)));
     }
 
 }

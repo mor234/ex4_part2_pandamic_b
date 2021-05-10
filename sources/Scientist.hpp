@@ -6,8 +6,12 @@
 namespace pandemic{
     class Scientist:public Player
     {
+        private:
+            int _cards_needed_for_cure;
         public:
-            Scientist(const Board & board, const City & city, const int & num):Player(board,city){}        
-            virtual std::string role(); 
+            Scientist(Board & board, const City & city, const int & num);       
+            virtual std::string role() override; 
+            virtual Player& discover_cure(Color color) override;
+
     };
 }

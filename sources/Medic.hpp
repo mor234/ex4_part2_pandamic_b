@@ -8,7 +8,11 @@ namespace pandemic{
     class Medic:public Player
     {
         public:
-            Medic (const Board & board, const City & city){}
-            virtual std::string role(); 
+            Medic ( Board & board, const City & city):Player(board,city){}
+            virtual std::string role() override; 
+            virtual Player &discover_cure(Color color) override;
+            virtual Player &treat(City city) override;
+
+
     };
 }

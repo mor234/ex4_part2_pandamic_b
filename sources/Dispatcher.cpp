@@ -9,4 +9,15 @@ namespace pandemic{
     string Dispatcher::role(){
         return "Dispatcher";
     }
+    Player &Player::fly_direct(City city) {
+        if(_board.has_study_station(_current_city))
+        {
+            _current_city=city;
+        }
+        else
+        {
+            Player::fly_direct(city);
+        }
+        return *this;
+    }
 }
