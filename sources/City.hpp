@@ -2,7 +2,7 @@
 #pragma once
 
 namespace pandemic {
-
+    const int NUMBER_OF_CITIES=48;
     enum City {
         Algiers, Atlanta,
         Baghdad, Bangkok, Beijing, Bogota, BuenosAires,

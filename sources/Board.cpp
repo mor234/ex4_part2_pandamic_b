@@ -1,7 +1,8 @@
 #include "Board.hpp"
-
+#include <array>
 using namespace std;
 namespace pandemic {
+ 
 
     void Board::initialize_board() {
         board_city_map[Algiers] = make_pair(Black, set{Madrid, Paris, Istanbul, Cairo});
@@ -33,11 +34,11 @@ namespace pandemic {
         board_city_map[Manila] = make_pair(Red, set{Taipei, SanFrancisco, HoChiMinhCity, Sydney});
         board_city_map[MexicoCity] = make_pair(Yellow, set{LosAngeles, Chicago, Miami, Lima, Bogota});
         board_city_map[Miami] = make_pair(Yellow, set{Atlanta, MexicoCity, Washington, Bogota});
-        board_city_map[Milan] = make_pair(Blue, set{Essen, Paris, Istanbul};
-        board_city_map[Montreal] = make_pair(Blue, set{Chicago, Washington, NewYork};
-        board_city_map[Moscow] = make_pair(Black, set{StPetersburg, Istanbul, Tehran};
+        board_city_map[Milan] = make_pair(Blue, set{Essen, Paris, Istanbul});
+        board_city_map[Montreal] = make_pair(Blue, set{Chicago, Washington, NewYork});
+        board_city_map[Moscow] = make_pair(Black, set{StPetersburg, Istanbul, Tehran});
         board_city_map[Mumbai] = make_pair(Black, set{Karachi, Delhi, Chennai});
-        board_city_map[NewYork] = make_pair(Blue, set{Montreal, Washington, London, Madrid};
+        board_city_map[NewYork] = make_pair(Blue, set{Montreal, Washington, London, Madrid});
         board_city_map[Osaka] = make_pair(Red, set{Taipei, Tokyo});
         board_city_map[Paris] = make_pair(Blue, set{Algiers, Essen, Madrid, Milan, London});
         board_city_map[Riyadh] = make_pair(Black, set{Baghdad, Cairo, Karachi});
@@ -54,13 +55,20 @@ namespace pandemic {
         board_city_map[Washington] = make_pair(Blue, set{Atlanta, NewYork, Montreal, Miami});
     }
 
-    Board::Board():sickness_cubes_num(0) {
+    Board::Board() {
         initialize_board();
+        cures.fill(false);
     }
-
+/**
+ * @brief check if there are no sickness cubes on the board
+ * 
+ * @return true 
+ * @return false 
+ */
     bool Board::is_clean() {
         for(auto city :city_attributes)
         {
+            //sickness cubes equal 0
             if (get<0>(city.second)!=0)
             {
                 return false;
@@ -70,32 +78,44 @@ namespace pandemic {
     }
 
     void Board::remove_cures() {
-        for(auto city :city_attributes)
+        for (auto cure:cures)
         {
-            get<1>(city.second)=0;
+            cure=false;
         }
     }
-    Color Board::color_for_city(City city){
 
-        return board_city_map[city].first;
-    }
-    bool Board::are_cities_connected(City city1,City city2){
-        return (board_city_map[city1].second).find(city2)!=(board_city_map[city1].second).end();
-    }
 
-    // const int &Board::operator[](City city) const {
-    //     return get<0>(city_attributes[city]);
-    // }
+    const int &Board::operator[](City city) const {
+         return get<0>(city_attributes.at(city));
+     }
 
     int &Board::operator[](City city) {
         return get<0>(city_attributes[city]);
     }
+    
 
     //----------------------------------
     // friend global IO operators
     //----------------------------------
     std::ostream &operator<<(std::ostream &output, const Board &board) {
         return (output << "hello");
+    }
+
+    bool & Board::has_study_station(City city)
+    {
+        return get<1>(city_attributes[city]);
+    }
+    const Color & Board::color_for_city(City city)
+    {
+        return board_city_map[city].first;
+    }
+    bool Board::are_cities_connected(City city1,City city2)
+    {
+        return (board_city_map[city1].second).find(city2)!=(board_city_map[city1].second).end();
+    }
+    bool & Board::cure_for_color(Color color)
+    {
+        return cures[array<bool,COLOR_NUMBER>::size_type(color)];
     }
 
 }

@@ -3,7 +3,7 @@
 #include "Player.hpp"
 #include <map>
 #include <set>
-#include<tuple> // for tuple
+#include<array> 
 
 
 #include <iostream>
@@ -12,16 +12,19 @@ namespace pandemic{
     class Board{
         private:
             static std::map< City, std::pair <Color, std::set <City> > >board_city_map;
-            void initialize_board();
-            int sickness_cubes_num;
-            std::map<City,std::tuple<int /*sickness_cubes*/,int /*cures*/,int /*study_station*/>> city_attributes;
+            static void initialize_board();
+            // int sickness_cubes_num;
+            std::map<City,std::pair<int /*sickness_cubes*/,bool /*study_station*/>> city_attributes;
+            std::array<bool,COLOR_NUMBER>cures;
         public:
-            const int NUMBER_OF_CITIES=48;
             Board ();
             void remove_cures();
             bool is_clean();
-            Color color_for_city(City city);
-            bool are_cities_connected(City city1,City city2);
+           static const Color & color_for_city(City city);
+
+            static bool are_cities_connected(City city1,City city2);
+            bool & has_study_station(City city);
+            bool & cure_for_color(Color color);
             //operator []
             const int & operator[](City city) const;
             int& operator[](City city);
