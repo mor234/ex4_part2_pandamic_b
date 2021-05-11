@@ -12,7 +12,8 @@ namespace pandemic{
 
 
         protected:
-            Board _board;
+            static const int CARDS_FOR_CURE=5;
+            pandemic::Board _board;
             City _current_city;
             std::set<City> _cards;
             bool has_card(City city);
@@ -23,7 +24,7 @@ namespace pandemic{
 
 
         public:
-            Player(Board & board,const City & current_city);
+            Player(pandemic::Board & board,const City & current_city);
             Player & take_card(City city);
 
             //movements options

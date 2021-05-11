@@ -33,7 +33,7 @@ namespace pandemic {
 
     //movements options
     Player &Player::drive(City city) {
-        if (_board.are_cities_connected(_current_city, city)) {
+        if (Board.are_cities_connected(_current_city, city)) {
             _current_city = city;
         } else {
             throw invalid_argument{"Error. can't drive to an un connected city."};
@@ -91,7 +91,7 @@ namespace pandemic {
         return *this;
     }
 
-    bool Player::has_x_color_cards(Color color,int cards_for_cure=5) {
+    bool Player::has_x_color_cards(Color color,int cards_for_cure=CARDS_FOR_CURE) {
         int counter = 0;
         for (auto card:_cards) {
             if (_board.color_for_city(card) == color) {
@@ -101,7 +101,7 @@ namespace pandemic {
         return counter >= cards_for_cure;
     }
 
-    void Player::throw_x_color_cards(Color color,int cards_for_cure=5) {
+    void Player::throw_x_color_cards(Color color,int cards_for_cure=CARDS_FOR_CURE) {
         int counter = cards_for_cure;
         for (auto card_itr = _cards.begin(); card_itr != _cards.end(); card_itr++) {
 

@@ -120,5 +120,10 @@ namespace pandemic {
     {
         return(cures.at(array<bool,COLOR_NUMBER>::size_type (color)));
     }
+   set <City> Board::near_cities(City city)
+   {
+       return (board_city_map[city]).second;
+   }
+
 
 }

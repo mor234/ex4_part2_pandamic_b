@@ -9,7 +9,8 @@ namespace pandemic{
     class FieldDoctor:public Player
     {
         public:
-            FieldDoctor (const Board & board, const City & city){}
-            virtual std::string role(); 
+            FieldDoctor ( Board & board, const City & city):Player(board,city){}
+            virtual std::string role() override; 
+            Player & treat(City city) override;
     };
 }

@@ -8,8 +8,8 @@ namespace pandemic{
     {
         public:
             OperationsExpert (Board & board, const City & city):Player(board,city){}        
-            virtual std::string role(); 
-            virtual Player & build()override;
+            virtual std::string role() override; 
+            virtual Player & build() override;
    
     };
 

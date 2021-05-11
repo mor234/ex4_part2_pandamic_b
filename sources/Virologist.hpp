@@ -7,7 +7,8 @@ namespace pandemic{
     class Virologist:public Player
     {
         public:
-            Virologist (const Board & board, const City & city){}
-            virtual std::string role(); 
+            Virologist (Board & board, const City & city):Player(board,city){}
+            virtual std::string role() override; 
+            virtual  Player &treat(City city) override;
     };
 }

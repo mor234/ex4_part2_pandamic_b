@@ -22,8 +22,8 @@ namespace pandemic{
             Board ();
             void remove_cures();
             bool is_clean();
-           static const Color & color_for_city(City city);
-
+            static const Color & color_for_city(City city);
+            static std::set <City> near_cities(City city);
             static bool are_cities_connected(City city1,City city2);
             bool & has_study_station(City city);
             bool & color_has_cure(Color color);
