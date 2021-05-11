@@ -1,4 +1,6 @@
 #include "Player.hpp"
+#include "Board.hpp"
+
 #include "City.hpp"
 #include "Color.hpp"//check if have to
 
@@ -33,7 +35,7 @@ namespace pandemic {
 
     //movements options
     Player &Player::drive(City city) {
-        if (Board.are_cities_connected(_current_city, city)) {
+        if (Board::are_cities_connected(_current_city, city)) {
             _current_city = city;
         } else {
             throw invalid_argument{"Error. can't drive to an un connected city."};
@@ -67,7 +69,7 @@ namespace pandemic {
             throw invalid_argument{"Error. can't fly shuttle from a city without study station."};
         }
             //if the destination city doesn't have study station 
-        else if (!_board.has_study_station(city)) {
+        if (!_board.has_study_station(city)) {
             throw invalid_argument{"Error. can't fly shuttle to a city without study station."};
         } else//both has study stations
         {
@@ -82,7 +84,7 @@ namespace pandemic {
         }
         if (_board.sickness_cubes(city) > 0) {
             _board.sickness_cubes(city)--;
-            if (_board.color_has_cure(_board.color_for_city(city))) {
+            if (_board.color_has_cure(Board::color_for_city(city))) {
                 _board.sickness_cubes(city) = 0;//if discovered a cure- remove all sickness cubes
             }
         } else {

@@ -13,18 +13,18 @@ namespace pandemic{
 
         protected:
             static const int CARDS_FOR_CURE=5;
-            pandemic::Board _board;
+            Board _board;
             City _current_city;
             std::set<City> _cards;
             bool has_card(City city);
             void throw_card(City city);
-            void throw_x_color_cards(Color color,int cards_for_cure=5);
-            bool has_x_color_cards(Color color,int cards_for_cure=5);
+            void throw_x_color_cards(Color color,int cards_for_cure=CARDS_FOR_CURE);
+            bool has_x_color_cards(Color color,int cards_for_cure=CARDS_FOR_CURE);
 
 
 
         public:
-            Player(pandemic::Board & board,const City & current_city);
+            Player(Board & board,const City & current_city);
             Player & take_card(City city);
 
             //movements options
