@@ -3,8 +3,15 @@
 using namespace std;
 namespace pandemic {
  
+    std::map< City, std::pair <Color, std::set <City> > >Board::board_city_map;
 
+    Board::Board() {
+        initialize_board();
+        cures.fill(false);
+    }
+    
     void Board::initialize_board() {
+    
         board_city_map[Algiers] = make_pair(Black, set{Madrid, Paris, Istanbul, Cairo});
         board_city_map[Atlanta] = make_pair(Blue, set{Chicago, Miami, Washington});
         board_city_map[Baghdad] = make_pair(Black, set{Tehran, Istanbul, Cairo, Riyadh, Karachi});
@@ -53,11 +60,6 @@ namespace pandemic {
         board_city_map[Tehran] = make_pair(Black, set{Baghdad, Moscow, Karachi, Delhi});
         board_city_map[Tokyo] = make_pair(Red, set{Seoul, Shanghai, Osaka, SanFrancisco});
         board_city_map[Washington] = make_pair(Blue, set{Atlanta, NewYork, Montreal, Miami});
-    }
-
-    Board::Board() {
-        initialize_board();
-        cures.fill(false);
     }
 /**
  * @brief check if there are no sickness cubes on the board

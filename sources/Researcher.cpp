@@ -13,14 +13,17 @@ namespace pandemic {
         return "Researcher";
     }
 
-    Player &Researcher::discover_cure(Color color) 
+    Player & Researcher::discover_cure(Color color) 
     {
-        if (!_board.color_has_cure(color)) {
-            if (has_x_color_cards(color)) {
+        if (!_board.color_has_cure(color)) 
+        {
+            if (has_x_color_cards(color)) 
+            {
                 throw_x_color_cards(color);
                 _board.color_has_cure(color) = true;
             } 
-            else {
+            else 
+            {
                 throw invalid_argument{"Error. can't discover cures without enough cards in the maching color"};
             }
         }

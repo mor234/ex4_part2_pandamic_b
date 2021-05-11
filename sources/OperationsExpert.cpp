@@ -14,7 +14,7 @@ namespace pandemic{
      * 
      * @return Player& 
      */
-    Player &Player::build() {
+    Player &OperationsExpert::build() {
         _board.has_study_station(_current_city) = true;
         return *this;
     }

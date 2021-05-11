@@ -8,7 +8,7 @@ using namespace std;
 namespace pandemic {
     Player::Player(Board &board, const City &current_city) {
         _board = board;
-        _current_city - current_city;
+        _current_city = current_city;
     }
 
     bool Player::has_card(City city) {
@@ -31,6 +31,7 @@ namespace pandemic {
     // }
     Player &Player::take_card(City city) {
         _cards.insert(city);
+        return *this;
     }
 
     //movements options
@@ -93,7 +94,7 @@ namespace pandemic {
         return *this;
     }
 
-    bool Player::has_x_color_cards(Color color,int cards_for_cure=CARDS_FOR_CURE) {
+    bool Player::has_x_color_cards(Color color,int cards_for_cure/*defult: CARDS_FOR_CURE=5*/) {
         int counter = 0;
         for (auto card:_cards) {
             if (_board.color_for_city(card) == color) {
@@ -103,7 +104,7 @@ namespace pandemic {
         return counter >= cards_for_cure;
     }
 
-    void Player::throw_x_color_cards(Color color,int cards_for_cure=CARDS_FOR_CURE) {
+    void Player::throw_x_color_cards(Color color,int cards_for_cure/*defult: CARDS_FOR_CURE=5*/) {
         int counter = cards_for_cure;
         for (auto card_itr = _cards.begin(); card_itr != _cards.end(); card_itr++) {
 

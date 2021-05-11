@@ -10,7 +10,7 @@ namespace pandemic{
     string FieldDoctor::role(){
         return "FieldDoctor";
     }
-    Player &Player::treat(City city) {
+    Player &FieldDoctor::treat(City city) {
         bool isNearCity=false;
         for(City n_city:_board.near_cities(city))
         {

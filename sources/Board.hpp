@@ -13,7 +13,6 @@ namespace pandemic{
         private:
             static std::map< City, std::pair <Color, std::set <City> > >board_city_map;
             static void initialize_board();
-            // int sickness_cubes_num;
             std::map<City,std::pair<int /*sickness_cubes*/,bool /*study_station*/>> city_attributes;
             std::array<bool,COLOR_NUMBER>cures;
         public:

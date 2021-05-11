@@ -21,13 +21,14 @@ namespace pandemic{
     }
     return *this;
     }
-    Player &Medic::discover_cure(Color color) {
+    Player &Medic::discover_cure(Color color)
+     {
         Player::discover_cure(color);
         //if discover cure succeeded
         if (_board.color_has_cure(_board.color_for_city(_current_city))) {
             _board.sickness_cubes(_current_city) = 0;//if discovered a cure- remove all sickness cubes
         }
-
+        return *this;
     }
 }
 
