@@ -11,6 +11,7 @@ namespace pandemic{
         return "Virologist";
     }
     Player & Virologist::treat(const City & city){
+        ///////////////////////////throw card;
         if ((*_board)[city]> 0) {
             (*_board)[city]--;
             if (_board->color_has_cure(Board::color_for_city(city))) {

@@ -93,7 +93,10 @@ namespace pandemic {
     }
 
     void Board::remove_cures() {
-         cures.fill(false);
+        for(bool & cure:cures)
+        {
+            cure=false;
+        }
     }
 
 

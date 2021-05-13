@@ -11,24 +11,34 @@ namespace pandemic{
     }
     
     Player &GeneSplicer::discover_cure(const Color & color) {
+        if (_board->color_has_cure(color)) 
+        {
+            return *this;
+        }
+
         if (_board->has_study_station(_current_city)){
-            if (!_board->color_has_cure(color)) {
+            // if (!_board->color_has_cure(color)) {
                 if (_cards.size()>=CARDS_FOR_CURE) {
-                    int i=CARDS_FOR_CURE;
-                    for(auto card:_cards)
+
+                    int cards_for_cure=CARDS_FOR_CURE;
+                    
+                    for(auto card_itr=_cards.begin();card_itr!=_cards.end();)
                     {
-                        throw_card(card);
-                        i--;
-                        if(i==0)
-                        {
+                         // Remove string from set if length is greater than 3.
+                        card_itr = _cards.erase(card_itr);
+                        cards_for_cure--;
+                        if (cards_for_cure == 0) {
                             break;
                         }
+                 
                     }
                     _board->color_has_cure(color) = true;
+                    cout<<"has cure";
                 } else {
+                    cout<<"c ";
                     throw invalid_argument{"Error. can't discover cures without enough cards."};
                 }
-            }
+            // }
         } 
         else
         {

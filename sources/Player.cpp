@@ -22,7 +22,10 @@ namespace pandemic {
      * @return iterator 
      */
     void Player::throw_card(const City & city) {
+        cout<<"h";
         _cards.erase(city);
+        cout<<"s";
+
     }
 
     // City Player::rand_city()
@@ -121,8 +124,8 @@ namespace pandemic {
     }
 
     void Player::throw_x_color_cards(const Color & color,int cards_for_cure/*defult: CARDS_FOR_CURE=5*/) {
-        auto card_itr = _cards.begin();
-        while(card_itr != _cards.end())
+         
+        for(auto card_itr = _cards.begin();card_itr != _cards.end();)
         {
             if(Board::color_for_city(*card_itr) == color)
             {
