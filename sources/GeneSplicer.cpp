@@ -10,10 +10,10 @@ namespace pandemic{
         return "GeneSplicer";
     }
     
-    Player &GeneSplicer::discover_cure(Color color) {
-        if (_board.has_study_station(_current_city)){
-            if (!_board.color_has_cure(color)) {
-                if (_cards.size()>=5) {
+    Player &GeneSplicer::discover_cure(const Color & color) {
+        if (_board->has_study_station(_current_city)){
+            if (!_board->color_has_cure(color)) {
+                if (_cards.size()>=CARDS_FOR_CURE) {
                     int i=CARDS_FOR_CURE;
                     for(auto card:_cards)
                     {
@@ -24,7 +24,7 @@ namespace pandemic{
                             break;
                         }
                     }
-                    _board.color_has_cure(color) = true;
+                    _board->color_has_cure(color) = true;
                 } else {
                     throw invalid_argument{"Error. can't discover cures without enough cards."};
                 }

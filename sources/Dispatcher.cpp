@@ -9,15 +9,19 @@ namespace pandemic{
     string Dispatcher::role(){
         return "Dispatcher";
     }
-    Player &Dispatcher::fly_direct(City city) {
-        if(_board.has_study_station(_current_city))
+    Player &Dispatcher::fly_direct(const City & city) {
+        if(city==_current_city)
+        {
+            throw invalid_argument{"Error. can't fly to the same city."};
+        }
+        if(_board->has_study_station(_current_city))
         {
             _current_city=city;
         }
-        else
-        {
-            Player::fly_direct(city);
-        }
+        // else
+        // {
+        //     Player::fly_direct(city);
+        // }
         return *this;
     }
 }

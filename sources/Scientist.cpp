@@ -17,12 +17,12 @@ namespace pandemic{
     string Scientist::role(){
         return "Scientist";
     }
-    Player & Scientist::discover_cure(Color color){
-        if (_board.has_study_station(_current_city)){
-            if (!_board.color_has_cure(color)) {
+    Player & Scientist::discover_cure(const Color & color){
+        if (_board->has_study_station(_current_city)){
+            if (!_board->color_has_cure(color)) {
                 if (has_x_color_cards(color,_cards_needed_for_cure)) {
                     throw_x_color_cards(color,_cards_needed_for_cure);
-                    _board.color_has_cure(color) = true;
+                    _board->color_has_cure(color) = true;
                 } else {
                     throw invalid_argument{"Error. can't discover cures without enough cards in the maching color"};
                 }

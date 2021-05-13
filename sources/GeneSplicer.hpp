@@ -9,7 +9,7 @@ namespace pandemic{
         public:            
             GeneSplicer ( Board & board, const City & city):Player(board,city){}
             virtual std::string role() override; 
-            virtual Player & discover_cure(Color color) override;
+            virtual Player & discover_cure(const Color & color) override;
         
     };
 }

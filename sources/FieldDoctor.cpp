@@ -10,9 +10,9 @@ namespace pandemic{
     string FieldDoctor::role(){
         return "FieldDoctor";
     }
-    Player &FieldDoctor::treat(City city) {
+    Player &FieldDoctor::treat(const City & city) {
         bool isNearCity=false;
-        for(City n_city:_board.near_cities(city))
+        for(City n_city:Board::near_cities(city))
         {
             if(n_city==city)
             {
@@ -23,10 +23,10 @@ namespace pandemic{
         if (city != _current_city &&!isNearCity) {
             throw invalid_argument{"can't treat a city without being in it or near it."};
         }
-        if (_board.sickness_cubes(city) > 0) {
-            _board.sickness_cubes(city)--;
-            if (_board.color_has_cure(_board.color_for_city(city))) {
-                _board.sickness_cubes(city) = 0;//if discovered a cure- remove all sickness cubes
+        if ((*_board)[city]> 0) {
+            (*_board)[city]--;
+            if (_board->color_has_cure(Board::color_for_city(city))) {
+                (*_board)[city] = 0;//if discovered a cure- remove all sickness cubes
             }
         } else {
             throw invalid_argument{"Error. can't treat a healthy city."};

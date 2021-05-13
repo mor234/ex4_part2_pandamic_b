@@ -1,14 +1,27 @@
 #include "Board.hpp"
-#include <array>
+#include<iostream>
 using namespace std;
 namespace pandemic {
  
     std::map< City, std::pair <Color, std::set <City> > >Board::board_city_map;
 
     Board::Board() {
-        initialize_board();
+        initialize_board();//fix
         cures.fill(false);
     }
+    // Board::Board(const Board  & board) {
+    //     city_attributes=board.city_attributes;
+    //     cures=board.cures;
+    // }
+    // Board& Board::operator=(const Board  & board) 
+    // {
+    //     if (this!=&board) 
+    //     { // preventing problems in a=a
+    //         city_attributes=board.city_attributes;
+    //         cures=board.cures;
+    //     } 
+    //     return *this; 
+    // } 
     
     void Board::initialize_board() {
     
@@ -80,10 +93,7 @@ namespace pandemic {
     }
 
     void Board::remove_cures() {
-        for (auto cure:cures)
-        {
-            cure=false;
-        }
+         cures.fill(false);
     }
 
 
@@ -99,10 +109,21 @@ namespace pandemic {
     //----------------------------------
     // friend global IO operators
     //----------------------------------
-    std::ostream &operator<<(std::ostream &output, const Board &board) {
-        return (output << "hello");
+    std::ostream &operator<<(std::ostream &output, /*const Board &board*/Board board) {
+        string str_out;
+
+        for(auto city:board.board_city_map)
+        {
+          
+            str_out+="city: "+to_string(city.first)+" color: "+to_string(city.second.first);
+            str_out+=" sickness level: "+to_string(board.sickness_cubes(city.first));
+            str_out+=" study stations: "+to_string(board.has_study_station(city.first));
+            str_out+="\n";
+        }
+
+        return (output << str_out);
     }
-    int & Board::sickness_cubes (City city){
+    int Board::sickness_cubes ( City city) {//fix!!!!!
         return get<0>(city_attributes[city]);
     }
 

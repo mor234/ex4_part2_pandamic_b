@@ -17,6 +17,8 @@ namespace pandemic{
             std::array<bool,COLOR_NUMBER>cures;
         public:
             Board ();
+            // Board(const Board  & board);
+            // Board& operator=(const Board  & board);
             void remove_cures();
             bool is_clean();
             static const Color & color_for_city(City city);
@@ -24,13 +26,14 @@ namespace pandemic{
             static bool are_cities_connected(City city1,City city2);
             bool & has_study_station(City city);
             bool & color_has_cure(Color color);
-            int & sickness_cubes (City city);
+            int  sickness_cubes (City  city);
+
             //operator []
             const int & operator[](City city) const;
             int& operator[](City city);
             //----------------------------------
             // friend global IO operators
             //----------------------------------
-            friend std::ostream& operator<< (std::ostream& output, const Board & board);
+            friend std::ostream& operator<< (std::ostream& output, /*const Board & board*/Board board);
     };
 }

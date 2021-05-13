@@ -13,29 +13,30 @@ namespace pandemic{
 
         protected:
             static const int CARDS_FOR_CURE=5;
-            Board _board;
             City _current_city;
             std::set<City> _cards;
-            bool has_card(City city);
-            void throw_card(City city);
-            void throw_x_color_cards(Color color,int cards_for_cure=CARDS_FOR_CURE);
-            bool has_x_color_cards(Color color,int cards_for_cure=CARDS_FOR_CURE);
+            bool has_card(const City & city);
+            void throw_card(const City & city);
+            void throw_x_color_cards(const Color& color,int cards_for_cure=CARDS_FOR_CURE);
+            bool has_x_color_cards(const Color& color,int cards_for_cure=CARDS_FOR_CURE);
 
 
 
         public:
+            Board * _board;
+
             Player(Board & board,const City & current_city);
-            Player & take_card(City city);
+            Player & take_card(const City & city);
 
             //movements options
-            Player & drive(City city);
-            virtual Player & fly_direct(City city);
-            Player & fly_charter(City city);
-            Player & fly_shuttle(City city);
+            Player & drive(const City & city);
+            virtual Player & fly_direct(const City & city);
+            Player & fly_charter(const City & city);
+            Player & fly_shuttle(const City & city);
 
-            virtual Player & treat(City city);
+            virtual Player & treat(const City & city);
 
-            virtual Player & discover_cure(Color color);
+            virtual Player & discover_cure(const Color& color);
             virtual Player & build();
             virtual std::string role()=0;
 

@@ -13,14 +13,14 @@ namespace pandemic {
         return "Researcher";
     }
 
-    Player & Researcher::discover_cure(Color color) 
+    Player & Researcher::discover_cure(const Color & color) 
     {
-        if (!_board.color_has_cure(color)) 
+        if (!_board->color_has_cure(color)) 
         {
             if (has_x_color_cards(color)) 
             {
                 throw_x_color_cards(color);
-                _board.color_has_cure(color) = true;
+                _board->color_has_cure(color) = true;
             } 
             else 
             {

@@ -11,7 +11,7 @@ namespace pandemic{
         public:
             Scientist(Board & board, const City & city, const int & num);       
             virtual std::string role() override; 
-            virtual Player& discover_cure(Color color) override;
+            virtual Player& discover_cure(const Color & color) override;
 
     };
 }

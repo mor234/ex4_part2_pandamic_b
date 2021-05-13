@@ -9,6 +9,6 @@ namespace pandemic{
         public:
             Virologist (Board & board, const City & city):Player(board,city){}
             virtual std::string role() override; 
-            virtual  Player &treat(City city) override;
+            virtual  Player &treat(const City & city) override;
     };
 }

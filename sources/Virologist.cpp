@@ -10,11 +10,11 @@ namespace pandemic{
     string Virologist::role(){
         return "Virologist";
     }
-    Player & Virologist::treat(City city){
-        if (_board.sickness_cubes(city) > 0) {
-            _board.sickness_cubes(city)--;
-            if (_board.color_has_cure(_board.color_for_city(city))) {
-                _board.sickness_cubes(city) = 0;//if discovered a cure- remove all sickness cubes
+    Player & Virologist::treat(const City & city){
+        if ((*_board)[city]> 0) {
+            (*_board)[city]--;
+            if (_board->color_has_cure(Board::color_for_city(city))) {
+                (*_board)[city] = 0;//if discovered a cure- remove all sickness cubes
             }
         } else {
             throw invalid_argument{"Error. can't treat a healthy city."};

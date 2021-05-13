@@ -9,7 +9,7 @@ namespace pandemic{
         public:
             Dispatcher (Board & board, const City & city):Player(board,city){}
             virtual std::string role() override; 
-            virtual Player & fly_direct(City city) override;
+            virtual Player & fly_direct(const City & city) override;
 
     };
 
