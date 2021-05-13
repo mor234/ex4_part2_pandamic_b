@@ -13,6 +13,11 @@ namespace pandemic{
     Player & Virologist::treat(const City & city){
         ///////////////////////////throw card;
         if ((*_board)[city]> 0) {
+            if(city!=_current_city &&!has_card(city))
+            {
+                throw invalid_argument{"Error. can't treat city without matching card."};
+            }
+            throw_card(city);
             (*_board)[city]--;
             if (_board->color_has_cure(Board::color_for_city(city))) {
                 (*_board)[city] = 0;//if discovered a cure- remove all sickness cubes

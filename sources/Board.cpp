@@ -51,7 +51,7 @@ namespace pandemic {
         board_city_map[London] = make_pair(Blue, set{NewYork, Madrid, Essen, Paris});
         board_city_map[LosAngeles] = make_pair(Yellow, set{SanFrancisco, Chicago, MexicoCity, Sydney});
         board_city_map[Madrid] = make_pair(Blue, set{London, NewYork, Paris, SaoPaulo, Algiers});
-        board_city_map[Manila] = make_pair(Red, set{Taipei, SanFrancisco, HoChiMinhCity, Sydney});
+        board_city_map[Manila] = make_pair(Red, set{HongKong,Taipei, SanFrancisco, HoChiMinhCity, Sydney});
         board_city_map[MexicoCity] = make_pair(Yellow, set{LosAngeles, Chicago, Miami, Lima, Bogota});
         board_city_map[Miami] = make_pair(Yellow, set{Atlanta, MexicoCity, Washington, Bogota});
         board_city_map[Milan] = make_pair(Blue, set{Essen, Paris, Istanbul});

@@ -33,9 +33,7 @@ namespace pandemic{
                  
                     }
                     _board->color_has_cure(color) = true;
-                    cout<<"has cure";
                 } else {
-                    cout<<"c ";
                     throw invalid_argument{"Error. can't discover cures without enough cards."};
                 }
             // }

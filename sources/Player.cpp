@@ -22,9 +22,7 @@ namespace pandemic {
      * @return iterator 
      */
     void Player::throw_card(const City & city) {
-        cout<<"h";
         _cards.erase(city);
-        cout<<"s";
 
     }
 
