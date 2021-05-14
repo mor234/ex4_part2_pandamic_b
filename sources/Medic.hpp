@@ -6,12 +6,19 @@
 #include "City.hpp"
 namespace pandemic{
     class Medic:public Player
-    {
+    {   private:
+            void treat_no_throws();
+
         public:
-            Medic ( Board & board, const City & city):Player(board,city){}
+            Medic ( Board & board, const City & city);
             virtual std::string role() override; 
-            virtual Player &discover_cure(const Color & color) override;
+            // virtual Player &discover_cure(const Color & color) override;
             virtual Player &treat(const City & city) override;
+
+            virtual Player & drive(const City & city)override;
+            virtual Player & fly_direct(const City & city)override;
+            virtual Player & fly_charter(const City & city)override;
+            virtual Player & fly_shuttle(const City & city)override;
 
 
     };

@@ -29,10 +29,10 @@ namespace pandemic{
             Player & take_card(const City & city);
 
             //movements options
-            Player & drive(const City & city);
+            virtual Player & drive(const City & city);
             virtual Player & fly_direct(const City & city);
-            Player & fly_charter(const City & city);
-            Player & fly_shuttle(const City & city);
+            virtual Player & fly_charter(const City & city);
+            virtual Player & fly_shuttle(const City & city);
 
             virtual Player & treat(const City & city);
 

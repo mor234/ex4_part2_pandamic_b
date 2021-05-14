@@ -11,6 +11,7 @@
 namespace pandemic{
     class Board{
         private:
+            // static bool is_first_time;
             static std::map< City, std::pair <Color, std::set <City> > >board_city_map;
             static void initialize_board();
             std::map<City,std::pair<int /*sickness_cubes*/,bool /*study_station*/>> city_attributes;
@@ -19,6 +20,7 @@ namespace pandemic{
             Board ();
             // Board(const Board  & board);
             // Board& operator=(const Board  & board);
+            void remove_stations();
             void remove_cures();
             bool is_clean();
             static const Color & color_for_city(City city);

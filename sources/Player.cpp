@@ -101,10 +101,12 @@ namespace pandemic {
             throw invalid_argument{"can't treat a city without being in it."};
         }
         if ((*_board)[city] > 0) {
+            cout<<(*_board)[city]<<" ";
             (*_board)[city]--;
             if (_board->color_has_cure(Board::color_for_city(city))) {
                 (*_board)[city] = 0;//if discovered a cure- remove all sickness cubes
             }
+            cout<<(*_board)[city]<<endl;
         } else {
             throw invalid_argument{"Error. can't treat a healthy city."};
         }
@@ -160,23 +162,19 @@ namespace pandemic {
     }
 
     Player &Player::build() {
-        if (has_card(_current_city)) {
-            if (!_board->has_study_station(_current_city)) {
+        if (!_board->has_study_station(_current_city)) {
+            if (has_card(_current_city)) 
+            {
                 throw_card(_current_city);
-                // cout<<"before: city: "<<_current_city<<" "<<  _board.has_study_station(_current_city)<<" study stations"<<endl;
-                // cout<<_board;
-                // cout<<"_______________________________________"<<endl;
                 _board->has_study_station(_current_city) = true;
-                // cout<<"city: "<<_current_city<<" "<<  _board.has_study_station(_current_city)<<" study stations"<<endl;
-                // cout<<"_______________________________________"<<endl;
-
-                // cout<<_board;
             }
-        } else {
-            throw invalid_argument{"Error. can't build study station without matching card."};
+            else {
+                throw invalid_argument{"Error. can't build study station without matching card."};
+            }
         }
         return *this;
     }
+
 
     void Player::remove_cards() {
         _cards.clear();

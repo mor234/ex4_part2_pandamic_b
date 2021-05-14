@@ -4,9 +4,14 @@ using namespace std;
 namespace pandemic {
  
     std::map< City, std::pair <Color, std::set <City> > >Board::board_city_map;
-
+    // Board::is_first_time=false;
     Board::Board() {
-        initialize_board();//fix
+        // if(is_first_time)
+        // {
+            initialize_board();//fix
+            // is_first_time=false;
+        // }
+        //initialize cures
         cures.fill(false);
         //initialize city_attributes
         for(const auto &city_info:board_city_map)
@@ -103,6 +108,15 @@ namespace pandemic {
             cure=false;
         }
     }
+    void Board::remove_stations()
+    {
+         for(auto & atr:city_attributes)
+        {
+            auto & pair_cube_station=atr.second;
+            pair_cube_station.second=false;
+        }
+    }
+
 
 
     const int &Board::operator[](City city) const {
