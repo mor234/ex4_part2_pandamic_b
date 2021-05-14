@@ -5,7 +5,7 @@ namespace pandemic {
  
     std::map< City, std::pair <Color, std::set <City> > >Board::board_city_map;
     // Board::is_first_time=false;
-    Board::Board() {
+    Board::Board() :cures({false}){
         // if(is_first_time)
         // {
             initialize_board();//fix
@@ -134,12 +134,12 @@ namespace pandemic {
     std::ostream &operator<<(std::ostream &output, /*const Board &board*/Board board) {
         string str_out;
 
-        for(auto city:board.board_city_map)
+        for(const auto & city:Board::board_city_map)
         {
           
             str_out+="city: "+to_string(city.first)+" color: "+to_string(city.second.first);
             str_out+=" sickness level: "+to_string(board.sickness_cubes(city.first));
-            str_out+=" study stations: "+to_string(board.has_study_station(city.first));
+            str_out+=" study stations: "+to_string(int(board.has_study_station(city.first)));
             str_out+="\n";
         }
 
