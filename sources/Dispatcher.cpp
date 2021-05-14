@@ -18,10 +18,10 @@ namespace pandemic{
         {
             _current_city=city;
         }
-        // else
-        // {
-        //     Player::fly_direct(city);
-        // }
+        else
+        {
+            Player::fly_direct(city);
+        }
         return *this;
     }
 }

@@ -12,7 +12,7 @@ namespace pandemic{
     }
     Player &FieldDoctor::treat(const City & city) {
         bool isNearCity=false;
-        for(City n_city:Board::near_cities(city))
+        for(City n_city:Board::near_cities(_current_city))
         {
             if(n_city==city)
             {

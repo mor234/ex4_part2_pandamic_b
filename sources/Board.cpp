@@ -8,6 +8,11 @@ namespace pandemic {
     Board::Board() {
         initialize_board();//fix
         cures.fill(false);
+        //initialize city_attributes
+        for(const auto &city_info:board_city_map)
+        {
+            city_attributes[city_info.first]=make_pair(0,false);
+        }
     }
     // Board::Board(const Board  & board) {
     //     city_attributes=board.city_attributes;
