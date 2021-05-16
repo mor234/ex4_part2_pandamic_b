@@ -6,6 +6,13 @@
 using namespace std;
 
 namespace pandemic{
+    /**
+     * @brief Construct a new Scientist:: Scientist object
+     * keep the amount of cards needed for discovering cure
+     * @param board 
+     * @param city 
+     * @param num 
+     */
     Scientist::Scientist(Board & board, const City & city, const int & num):Player(board,city),_cards_needed_for_cure(num)
     {
         if(_cards_needed_for_cure<0)
@@ -13,10 +20,21 @@ namespace pandemic{
             _cards_needed_for_cure=0;
             throw out_of_range{"Error. number of cards can't be negative"};
         }
-    }       
+    }   
+    /**
+     * @brief 
+     * 
+     * @return string of player role
+     */
     string Scientist::role(){
         return "Scientist";
     }
+    /**
+     * @brief discover cure but with the amount of cards given in initialization
+     * 
+     * @param color of cure to discover
+     * @return Player& 
+     */
     Player & Scientist::discover_cure(const Color & color){
         if (_board->has_study_station(_current_city)){
             if (!_board->color_has_cure(color)) {

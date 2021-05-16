@@ -6,8 +6,12 @@
 using namespace std;
 
 namespace pandemic{
-    //remove sickness cubes from current city,if the cures exists.
-    void Medic::treat_no_throws()
+    
+    /**
+     * @brief remove sickness cubes from current city,if the cures exists.
+     * to be used in other functions
+     */
+    void Medic::has_cure_zero()
     {
         if(_board->color_has_cure(Board::color_for_city(_current_city)))
         {
@@ -15,13 +19,30 @@ namespace pandemic{
         }
     }
 
+    /**
+     * @brief Construct a new Medic:: Medic object,
+     * if has cure- remove sickness cubes from current city
+     * 
+     * @param board 
+     * @param city 
+     */
     Medic::Medic( Board & board, const City & city):Player(board,city){
-        treat_no_throws();
+        has_cure_zero();
     }
-
+    /**
+     * @brief 
+     * 
+     * @return string of player role 
+     */
     string Medic::role(){
         return "Medic";
     }
+    /**
+     * @brief remove all sickness cubes from current city
+     * 
+     * @param city 
+     * @return Player& 
+     */
     Player &Medic::treat(const City & city) {
     if (city != _current_city) {
         throw invalid_argument{"can't treat a city without being in it."};
@@ -33,16 +54,9 @@ namespace pandemic{
     }
     return *this;
     }
-    // Player &Medic::discover_cure(const Color & color)
-    //  {
-    //     Player::discover_cure(color);
-    //     //if discover cure succeeded
-    //     if (_board->color_has_cure(Board::color_for_city(_current_city))) {
-    //         (*_board)[_current_city] = 0;//if discovered a cure- remove all sickness cubes
-    //     }
-    //     return *this;
-    // }
-
+    //----------------------------------
+    // remove all sickness cubes from every city he enters- if has cure.
+    //----------------------------------
     Player & Medic::drive(const City & city)
     {
         City early_city=_current_city;
@@ -50,7 +64,7 @@ namespace pandemic{
         //if changed location 
         if(_current_city!=early_city)
         {
-            treat_no_throws();
+            has_cure_zero();
         }
         return *this;
 
@@ -61,7 +75,7 @@ namespace pandemic{
         //if changed location
         if(_current_city!=early_city)
         {
-            treat_no_throws();
+            has_cure_zero();
         }
         return *this;
 
@@ -73,7 +87,7 @@ namespace pandemic{
         //if changed location
         if(_current_city!=early_city)
         {
-            treat_no_throws();
+            has_cure_zero();
         }
         return *this;
 
@@ -84,7 +98,7 @@ namespace pandemic{
         //if changed location
         if(_current_city!=early_city)
         {
-            treat_no_throws();
+            has_cure_zero();
         }
         return *this;
     }

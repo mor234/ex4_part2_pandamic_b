@@ -5,10 +5,19 @@
 using namespace std;
 
 namespace pandemic{
-   
+   /**
+    * @brief  
+    * @return string of player role 
+    */
     string Dispatcher::role(){
         return "Dispatcher";
     }
+    /**
+     * @brief move to every city without throwing card if in city with study station
+     * 
+     * @param city 
+     * @return Player& 
+     */
     Player &Dispatcher::fly_direct(const City & city) {
         if(city==_current_city)
         {

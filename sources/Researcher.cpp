@@ -8,11 +8,20 @@
 using namespace std;
 
 namespace pandemic {
-
+    /**
+     * @brief 
+     * 
+     * @return string of player role
+     */
     string Researcher::role() {
         return "Researcher";
     }
-
+    /**
+     * @brief discover cure without being in a study station
+     * 
+     * @param color 
+     * @return Player& 
+     */
     Player & Researcher::discover_cure(const Color & color) 
     {
         if (!_board->color_has_cure(color)) 

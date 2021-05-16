@@ -3,7 +3,11 @@
 #include <string>
 using namespace std;
 namespace pandemic{
- 
+    /**
+     * @brief 
+     * 
+     * @return string of player role
+     */
     string OperationsExpert::role()
     {
         return "OperationsExpert";

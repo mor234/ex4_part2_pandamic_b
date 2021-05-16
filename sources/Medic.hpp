@@ -7,7 +7,7 @@
 namespace pandemic{
     class Medic:public Player
     {   private:
-            void treat_no_throws();
+            void has_cure_zero();
 
         public:
             Medic ( Board & board, const City & city);

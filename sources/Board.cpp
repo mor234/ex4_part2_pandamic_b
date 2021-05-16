@@ -2,37 +2,29 @@
 #include<iostream>
 using namespace std;
 namespace pandemic {
- 
+    //
+    bool Board::is_first_time = true; 
     std::map< City, std::pair <Color, std::set <City> > >Board::board_city_map;
-    // Board::is_first_time=false;
+    /**
+     * @brief Construct a new Board:: Board object, initialize cures to be false, 
+     * and if this it the first time object from type Board is created,
+     * initialize the map ot the connection between cities. 
+     */
     Board::Board() :cures({false}){
-        // if(is_first_time)
-        // {
-            initialize_board();//fix
-            // is_first_time=false;
-        // }
-        //initialize cures
-        cures.fill(false);
+        if(is_first_time)
+        {
+            initialize_board();
+            is_first_time=false;
+        }
         //initialize city_attributes
         for(const auto &city_info:board_city_map)
         {
             city_attributes[city_info.first]=make_pair(0,false);
         }
     }
-    // Board::Board(const Board  & board) {
-    //     city_attributes=board.city_attributes;
-    //     cures=board.cures;
-    // }
-    // Board& Board::operator=(const Board  & board) 
-    // {
-    //     if (this!=&board) 
-    //     { // preventing problems in a=a
-    //         city_attributes=board.city_attributes;
-    //         cures=board.cures;
-    //     } 
-    //     return *this; 
-    // } 
-    
+    /**
+     * @brief initialize the map ot the connection between cities.
+     */
     void Board::initialize_board() {
     
         board_city_map[Algiers] = make_pair(Black, set{Madrid, Paris, Istanbul, Cairo});
@@ -93,7 +85,7 @@ namespace pandemic {
     bool Board::is_clean() {
         for(auto city :city_attributes)
         {
-            //sickness cubes equal 0
+            //sickness cubes not equal 0
             if (get<0>(city.second)!=0)
             {
                 return false;
@@ -101,13 +93,18 @@ namespace pandemic {
         }
         return true;
     }
-
+    /**
+     * @brief remove all cures from the board by changing the flag to false
+     */
     void Board::remove_cures() {
         for(bool & cure:cures)
         {
             cure=false;
         }
     }
+    /**
+     * @brief  remove all study stations from the board by changing the flag to false
+     */
     void Board::remove_stations()
     {
          for(auto & atr:city_attributes)
@@ -116,14 +113,23 @@ namespace pandemic {
             pair_cube_station.second=false;
         }
     }
-
-
-
-    const int &Board::operator[](City city) const {
+    
+    /**
+     * @brief [] operator const, return number of sickness cubes in given city
+     * 
+     * @param city 
+     * @return const int& 
+     */
+    const int &Board::operator[](const City & city) const {
          return get<0>(city_attributes.at(city));
-     }
-
-    int &Board::operator[](City city) {
+    }
+    /**
+     * @brief mutable [] operator , return number of sickness cubes in given city
+     * and allows to change it.
+     * @param city 
+     * @return int& 
+     */
+    int &Board::operator[](const City & city) {
         return get<0>(city_attributes[city]);
     }
     
@@ -131,41 +137,83 @@ namespace pandemic {
     //----------------------------------
     // friend global IO operators
     //----------------------------------
-    std::ostream &operator<<(std::ostream &output, /*const Board &board*/Board board) {
+    /**
+     * @brief output operator for board' contains information about:
+     * city, color, sickness level and study station
+     */
+    std::ostream &operator<<(std::ostream &output, const Board &board) {//need fix!!!
         string str_out;
-
         for(const auto & city:Board::board_city_map)
-        {
-          
+        {  
             str_out+="city: "+to_string(city.first)+" color: "+to_string(city.second.first);
-            str_out+=" sickness level: "+to_string(board.sickness_cubes(city.first));
+            str_out+=" sickness level: "+to_string(board[city.first]);
             str_out+=" study stations: "+to_string(int(board.has_study_station(city.first)));
             str_out+="\n";
         }
-
         return (output << str_out);
     }
-    int Board::sickness_cubes ( City city) {//fix!!!!!
-        return get<0>(city_attributes[city]);
+    /**
+     * @brief return immutable bool if a given city has a study station
+     * 
+     * @param city 
+     * @return true if has a study station
+     * @return false if not
+     */
+    const bool & Board::has_study_station(City city) const
+    {
+        return get<1>(city_attributes.at(city));
     }
-
-    bool & Board::has_study_station(City city)
+    /**
+     * @brief return mutable bool if a given city has a study station
+     * 
+     * @param city 
+     * @return true if has a study station
+     * @return false if not
+     */
+    bool & Board::has_study_station(const City & city)
     {
         return get<1>(city_attributes[city]);
     }
-    const Color & Board::color_for_city(City city)
+    /**
+     * @brief static, return the matching color for a given city
+     * @param city 
+     * @return const Color& 
+     */
+    const Color & Board::color_for_city(const City & city)
     {
         return board_city_map[city].first;
     }
-    bool Board::are_cities_connected(City city1,City city2)
+    /**
+     * @brief return true if cities are directly connected, false if not.
+     * 
+     * @param city1 
+     * @param city2 
+     * @return true 
+     * @return false 
+     */
+    bool Board::are_cities_connected(const City & city1,const City & city2)
     {
         return (board_city_map[city1].second).find(city2)!=(board_city_map[city1].second).end();
     }
-    bool & Board::color_has_cure(Color color)
+    /**
+     * @brief return mutable bool. if the given color has cure return true' otherwise false, 
+     * allow to change the ansewer
+     * 
+     * @param color 
+     * @return true 
+     * @return false 
+     */
+    bool & Board::color_has_cure(const Color & color)
     {
         return(cures.at(array<bool,COLOR_NUMBER>::size_type (color)));
     }
-   set <City> Board::near_cities(City city)
+    /**
+     * @brief return set of all the cities directly connected to a given city.
+     * 
+     * @param city 
+     * @return set <City> 
+     */
+   set <City> Board::near_cities(const City & city)
    {
        return (board_city_map[city]).second;
    }
