@@ -24,7 +24,7 @@ namespace pandemic{
             static const Color & color_for_city(const City & city);
             static std::set <City> near_cities(const City & city);
             static bool are_cities_connected(const City & city1,const City & city2);
-            const bool & Board::has_study_station(City city) const;
+            const bool & has_study_station(City city) const;
             bool & has_study_station(const City & city);
             bool & color_has_cure(const Color & color);
 
