@@ -3,9 +3,10 @@
 #include "Scientist.hpp"
 #include "Player.hpp"
 #include <string>
+
 using namespace std;
 
-namespace pandemic{
+namespace pandemic {
     /**
      * @brief Construct a new Scientist:: Scientist object
      * keep the amount of cards needed for discovering cure
@@ -13,41 +14,40 @@ namespace pandemic{
      * @param city 
      * @param num 
      */
-    Scientist::Scientist(Board & board, const City & city, const int & num):Player(board,city),_cards_needed_for_cure(num)
-    {
-        if(_cards_needed_for_cure<0)
-        {
-            _cards_needed_for_cure=0;
+    Scientist::Scientist(Board &board, const City &city, const int &num) : Player(board, city),
+                                                                           _cards_needed_for_cure(num) {
+        if (_cards_needed_for_cure < 0) {
+            _cards_needed_for_cure = 0;
             throw out_of_range{"Error. number of cards can't be negative"};
         }
-    }   
+    }
+
     /**
      * @brief 
      * 
      * @return string of player role
      */
-    string Scientist::role(){
+    string Scientist::role() {
         return "Scientist";
     }
+
     /**
      * @brief discover cure but with the amount of cards given in initialization
      * 
      * @param color of cure to discover
      * @return Player& 
      */
-    Player & Scientist::discover_cure(const Color & color){
-        if (_board->has_study_station(_current_city)){
+    Player &Scientist::discover_cure(const Color &color) {
+        if (_board->has_study_station(_current_city)) {
             if (!_board->color_has_cure(color)) {
-                if (has_x_color_cards(color,_cards_needed_for_cure)) {
-                    throw_x_color_cards(color,_cards_needed_for_cure);
+                if (has_x_color_cards(color, _cards_needed_for_cure)) {
+                    throw_x_color_cards(color, _cards_needed_for_cure);
                     _board->color_has_cure(color) = true;
                 } else {
                     throw invalid_argument{"Error. can't discover cures without enough cards in the maching color"};
                 }
             }
-        } 
-        else
-        {
+        } else {
             throw invalid_argument{"Error. can't discover cures without study station in the city"};
         }
         return *this;

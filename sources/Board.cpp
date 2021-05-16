@@ -1,32 +1,34 @@
 #include "Board.hpp"
 #include<iostream>
+
 using namespace std;
 namespace pandemic {
     //
-    bool Board::is_first_time = true; 
-    std::map< City, std::pair <Color, std::set <City> > >Board::board_city_map;
+    bool Board::is_first_time = true;
+    std::map <City, std::pair<Color, std::set < City>> >
+    Board::board_city_map;
+
     /**
      * @brief Construct a new Board:: Board object, initialize cures to be false, 
      * and if this it the first time object from type Board is created,
      * initialize the map ot the connection between cities. 
      */
-    Board::Board() :cures({false}){
-        if(is_first_time)
-        {
+    Board::Board() : cures({false}) {
+        if (is_first_time) {
             initialize_board();
-            is_first_time=false;
+            is_first_time = false;
         }
         //initialize city_attributes
-        for(const auto &city_info:board_city_map)
-        {
-            city_attributes[city_info.first]=make_pair(0,false);
+        for (const auto &city_info:board_city_map) {
+            city_attributes[city_info.first] = make_pair(0, false);
         }
     }
+
     /**
      * @brief initialize the map ot the connection between cities.
      */
     void Board::initialize_board() {
-    
+
         board_city_map[Algiers] = make_pair(Black, set{Madrid, Paris, Istanbul, Cairo});
         board_city_map[Atlanta] = make_pair(Blue, set{Chicago, Miami, Washington});
         board_city_map[Baghdad] = make_pair(Black, set{Tehran, Istanbul, Cairo, Riyadh, Karachi});
@@ -53,7 +55,7 @@ namespace pandemic {
         board_city_map[London] = make_pair(Blue, set{NewYork, Madrid, Essen, Paris});
         board_city_map[LosAngeles] = make_pair(Yellow, set{SanFrancisco, Chicago, MexicoCity, Sydney});
         board_city_map[Madrid] = make_pair(Blue, set{London, NewYork, Paris, SaoPaulo, Algiers});
-        board_city_map[Manila] = make_pair(Red, set{HongKong,Taipei, SanFrancisco, HoChiMinhCity, Sydney});
+        board_city_map[Manila] = make_pair(Red, set{HongKong, Taipei, SanFrancisco, HoChiMinhCity, Sydney});
         board_city_map[MexicoCity] = make_pair(Yellow, set{LosAngeles, Chicago, Miami, Lima, Bogota});
         board_city_map[Miami] = make_pair(Yellow, set{Atlanta, MexicoCity, Washington, Bogota});
         board_city_map[Milan] = make_pair(Blue, set{Essen, Paris, Istanbul});
@@ -76,6 +78,7 @@ namespace pandemic {
         board_city_map[Tokyo] = make_pair(Red, set{Seoul, Shanghai, Osaka, SanFrancisco});
         board_city_map[Washington] = make_pair(Blue, set{Atlanta, NewYork, Montreal, Miami});
     }
+
 /**
  * @brief check if there are no sickness cubes on the board
  * 
@@ -83,56 +86,54 @@ namespace pandemic {
  * @return false 
  */
     bool Board::is_clean() {
-        for(auto city :city_attributes)
-        {
+        for (auto city :city_attributes) {
             //sickness cubes not equal 0
-            if (get<0>(city.second)!=0)
-            {
+            if (get<0>(city.second) != 0) {
                 return false;
             }
         }
         return true;
     }
+
     /**
      * @brief remove all cures from the board by changing the flag to false
      */
     void Board::remove_cures() {
-        for(bool & cure:cures)
-        {
-            cure=false;
+        for (bool &cure:cures) {
+            cure = false;
         }
     }
+
     /**
      * @brief  remove all study stations from the board by changing the flag to false
      */
-    void Board::remove_stations()
-    {
-         for(auto & atr:city_attributes)
-        {
-            auto & pair_cube_station=atr.second;
-            pair_cube_station.second=false;
+    void Board::remove_stations() {
+        for (auto &atr:city_attributes) {
+            auto &pair_cube_station = atr.second;
+            pair_cube_station.second = false;
         }
     }
-    
+
     /**
      * @brief [] operator const, return number of sickness cubes in given city
      * 
      * @param city 
      * @return const int& 
      */
-    const int &Board::operator[](const City & city) const {
-         return get<0>(city_attributes.at(city));
+    const int &Board::operator[](const City &city) const {
+        return get<0>(city_attributes.at(city));
     }
+
     /**
      * @brief mutable [] operator , return number of sickness cubes in given city
      * and allows to change it.
      * @param city 
      * @return int& 
      */
-    int &Board::operator[](const City & city) {
+    int &Board::operator[](const City &city) {
         return get<0>(city_attributes[city]);
     }
-    
+
 
     //----------------------------------
     // friend global IO operators
@@ -143,15 +144,15 @@ namespace pandemic {
      */
     std::ostream &operator<<(std::ostream &output, const Board &board) {//need fix!!!
         string str_out;
-        for(const auto & city:Board::board_city_map)
-        {  
-            str_out+="city: "+to_string(city.first)+" color: "+to_string(city.second.first);
-            str_out+=" sickness level: "+to_string(board[city.first]);
-            str_out+=" study stations: "+to_string(int(board.has_study_station(city.first)));
-            str_out+="\n";
+        for (const auto &city:Board::board_city_map) {
+            str_out += "city: " + to_string(city.first) + " color: " + to_string(city.second.first);
+            str_out += " sickness level: " + to_string(board[city.first]);
+            str_out += " study stations: " + to_string(int(board.has_study_station(city.first)));
+            str_out += "\n";
         }
         return (output << str_out);
     }
+
     /**
      * @brief return immutable bool if a given city has a study station
      * 
@@ -159,10 +160,10 @@ namespace pandemic {
      * @return true if has a study station
      * @return false if not
      */
-    const bool & Board::has_study_station(City city) const
-    {
+    const bool &Board::has_study_station(City city) const {
         return get<1>(city_attributes.at(city));
     }
+
     /**
      * @brief return mutable bool if a given city has a study station
      * 
@@ -170,19 +171,19 @@ namespace pandemic {
      * @return true if has a study station
      * @return false if not
      */
-    bool & Board::has_study_station(const City & city)
-    {
+    bool &Board::has_study_station(const City &city) {
         return get<1>(city_attributes[city]);
     }
+
     /**
      * @brief static, return the matching color for a given city
      * @param city 
      * @return const Color& 
      */
-    const Color & Board::color_for_city(const City & city)
-    {
+    const Color &Board::color_for_city(const City &city) {
         return board_city_map[city].first;
     }
+
     /**
      * @brief return true if cities are directly connected, false if not.
      * 
@@ -191,10 +192,10 @@ namespace pandemic {
      * @return true 
      * @return false 
      */
-    bool Board::are_cities_connected(const City & city1,const City & city2)
-    {
-        return (board_city_map[city1].second).find(city2)!=(board_city_map[city1].second).end();
+    bool Board::are_cities_connected(const City &city1, const City &city2) {
+        return (board_city_map[city1].second).find(city2) != (board_city_map[city1].second).end();
     }
+
     /**
      * @brief return mutable bool. if the given color has cure return true' otherwise false, 
      * allow to change the ansewer
@@ -203,20 +204,19 @@ namespace pandemic {
      * @return true 
      * @return false 
      */
-    bool & Board::color_has_cure(const Color & color)
-    {
-        return(cures.at(array<bool,COLOR_NUMBER>::size_type (color)));
+    bool &Board::color_has_cure(const Color &color) {
+        return (cures.at(array<bool, COLOR_NUMBER>::size_type(color)));
     }
+
     /**
      * @brief return set of all the cities directly connected to a given city.
      * 
      * @param city 
      * @return set <City> 
      */
-   set <City> Board::near_cities(const City & city)
-   {
-       return (board_city_map[city]).second;
-   }
+    set <City> Board::near_cities(const City &city) {
+        return (board_city_map[city]).second;
+    }
 
 
 }

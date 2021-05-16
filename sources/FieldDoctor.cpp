@@ -3,37 +3,38 @@
 #include "FieldDoctor.hpp"
 #include "Player.hpp"
 #include <string>
+
 using namespace std;
 
-namespace pandemic{
-   /**
-    * @brief 
-    * 
-    * @return string of player role 
-    */
-    string FieldDoctor::role(){
+namespace pandemic {
+    
+    /**
+     * @brief 
+     * 
+     * @return string of player role 
+     */
+    string FieldDoctor::role() {
         return "FieldDoctor";
     }
+
     /**
      * @brief 
      * treat current city and near cities
      * @param city 
      * @return Player& 
      */
-    Player &FieldDoctor::treat(const City & city) {
-        bool isNearCity=false;
-        for(City n_city:Board::near_cities(_current_city))
-        {
-            if(n_city==city)
-            {
-                isNearCity=true;
+    Player &FieldDoctor::treat(const City &city) {
+        bool isNearCity = false;
+        for (City n_city:Board::near_cities(_current_city)) {
+            if (n_city == city) {
+                isNearCity = true;
                 break;
             }
         }
-        if (city != _current_city &&!isNearCity) {
+        if (city != _current_city && !isNearCity) {
             throw invalid_argument{"can't treat a city without being in it or near it."};
         }
-        if ((*_board)[city]> 0)//has sickness cubes
+        if ((*_board)[city] > 0)//has sickness cubes
         {
             (*_board)[city]--;
             if (_board->color_has_cure(Board::color_for_city(city))) {

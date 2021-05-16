@@ -1,17 +1,19 @@
 #include "Player.hpp"
 #include "OperationsExpert.hpp"
 #include <string>
+
 using namespace std;
-namespace pandemic{
+namespace pandemic {
+    
     /**
      * @brief 
      * 
      * @return string of player role
      */
-    string OperationsExpert::role()
-    {
+    string OperationsExpert::role() {
         return "OperationsExpert";
     }
+
     /**
      * @brief doesn't need a maching card to build a study station,
      * so build anyway
@@ -22,6 +24,4 @@ namespace pandemic{
         _board->has_study_station(_current_city) = true;
         return *this;
     }
-
-
 }
