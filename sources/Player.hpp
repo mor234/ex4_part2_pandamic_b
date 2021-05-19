@@ -27,9 +27,14 @@ namespace pandemic {
     public:
         //constructor
         Player(Board &board, const City &current_city);
+        virtual ~Player(){}
+        //get
+        City get_city(){return _current_city;}
+
 
         //game methods
         Player &take_card(const City &city);
+
 
         //movements options
         virtual Player &drive(const City &city);

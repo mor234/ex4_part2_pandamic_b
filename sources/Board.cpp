@@ -145,9 +145,10 @@ namespace pandemic {
     std::ostream &operator<<(std::ostream &output, const Board &board) {//need fix!!!
         string str_out;
         for (const auto &city:Board::board_city_map) {
-            str_out += "city: " + to_string(city.first) + " color: " + to_string(city.second.first);
-            str_out += " sickness level: " + to_string(board[city.first]);
-            str_out += " study stations: " + to_string(int(board.has_study_station(city.first)));
+            str_out += "city: " + to_string(city.first) +", "+string_for_city(city.first);
+            str_out +="\t color: " + to_string(city.second.first)+", "+string_for_color(city.second.first);
+            str_out += "\t sickness level: " + to_string(board[city.first]);
+            str_out += "\t study stations: " + to_string(int(board.has_study_station(city.first)));
             str_out += "\n";
         }
         return (output << str_out);
