@@ -45,6 +45,7 @@
 //     Player * player=NULL;
 //     int option=-1;
 //     int city=-1;
+//     int color=-1;
 //     while((bool)option)
 //     {
 //         cout<<"which player would you like to be? enter:\n0- exit\n1- dispatcher\n2- field_doctor\n";
@@ -134,7 +135,7 @@
 //                     break;
 //                 case discover_cure:
 //                     cout<<"please enter color, enter number between 0-3:\n";
-//                     int color=-1;
+//                     color=-1;
 //                     cin>>color;
 //                     player->discover_cure((Color)color);
 //                     break;
