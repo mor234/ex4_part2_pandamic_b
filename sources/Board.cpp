@@ -13,11 +13,12 @@ namespace pandemic {
      * and if this it the first time object from type Board is created,
      * initialize the map ot the connection between cities. 
      */
-    Board::Board() : cures({false}) {
+    Board::Board() : cures({}) {
         if (is_first_time) {
             initialize_board();
             is_first_time = false;
         }
+        cures.fill(false);
         //initialize city_attributes
         for (const auto &city_info:board_city_map) {
             city_attributes[city_info.first] = make_pair(0, false);
@@ -99,9 +100,7 @@ namespace pandemic {
      * @brief remove all cures from the board by changing the flag to false
      */
     void Board::remove_cures() {
-        for (bool &cure:cures) {
-            cure = false;
-        }
+         cures.fill(false);
     }
 
     /**
@@ -142,16 +141,15 @@ namespace pandemic {
      * @brief output operator for board' contains information about:
      * city, color, sickness level and study station
      */
-    std::ostream &operator<<(std::ostream &output, const Board &board) {//need fix!!!
-        string str_out;
+    std::ostream &operator<<(std::ostream &output, const Board &board) {
         for (const auto &city:Board::board_city_map) {
-            str_out += "--city: " + to_string(city.first) +", "+string_for_city(city.first);
-            str_out +=" --color: " + to_string(city.second.first)+", "+string_for_color(city.second.first);
-            str_out += " --sickness level: " + to_string(board[city.first]);
-            str_out += " --study stations: " + to_string(int(board.has_study_station(city.first)));
-            str_out += "\n";
+            output <<"--city: " <<city.first<<", "+string_for_city(city.first);
+            output <<" --color: " <<city.second.first<<", "+string_for_color(city.second.first);
+            output << " --sickness level: " <<board[city.first];
+            output << " --study stations: " <<(int)board.has_study_station(city.first);
+            output << "\n";
         }
-        return (output << str_out);
+        return output;
     }
 
     /**

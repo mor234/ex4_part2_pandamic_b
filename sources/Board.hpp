@@ -40,7 +40,7 @@ namespace pandemic {
         friend std::ostream &operator<<(std::ostream &output, const Board &board);
 
         //----------------------------------
-        // help functions
+        // help functions- convert, get&set
         //----------------------------------
         static const Color &color_for_city(const City &city);
 
